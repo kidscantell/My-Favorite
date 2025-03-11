@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+            overflow: hidden;
+        }
+
+        /* Food animation */
+        .food {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.7;
+            animation: floatFood 10s linear infinite;
+        }
+
+        @keyframes floatFood {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-10vh); }
+        }
+
+        /* Button Styling */
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff4757;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>All About My Favorite</h1>
+    <button id="favoriteBtn">Click to Enter Favorite</button>
+
+    <script>
+        function yourFavorite() {
+            const favoriteItem = prompt("Enter your favorite food:");
+            if (favoriteItem) {
+                button.textContent = `My favorite food is: ${favoriteItem}`;
+            }
+        }
+
+        const button = document.querySelector("#favoriteBtn");
+        button.addEventListener("click", yourFavorite);
+
+        // Function to create floating food emojis
+        function createFoodAnimation() {
+            const foodEmojis = ["🍕", "🍔", "🍟", "🌭", "🍣", "🍩", "🍎", "🍉", "🍗", "🥗"];
+            for (let i = 0; i < 15; i++) {
+                let food = document.createElement("div");
+                food.classList.add("food");
+                food.textContent = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+                food.style.left = Math.random() * 100 + "vw";
+                food.style.animationDuration = (Math.random() * 5 + 5) + "s"; // Random speed
+                document.body.appendChild(food);
+
+                // Remove food elements after animation completes
+                setTimeout(() => {
+                    food.remove();
+                }, 10000);
+            }
+        }
+
+        // Create food animation every 3 seconds
+        setInterval(createFoodAnimation, 3000);
+    </script>
+
+</body>
+</html>
